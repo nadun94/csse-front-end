@@ -21,7 +21,7 @@ function checkLogin() {
         {indexRoutes.map((prop, key) => {
           return (
            <div>
-              <Redirect to="/home" />
+              {/* <Redirect to="/home" /> */}
             <Route path={prop.path} key={key} component={prop.component} />
             </div>
           );
