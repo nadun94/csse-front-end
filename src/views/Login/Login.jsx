@@ -5,14 +5,15 @@ import CogIcon from "react-icons/lib/fa/cogs";
 import axios from "axios";
 import { PropagateLoader } from "react-spinners";
 import "../../assets/css/tasks.css";
+import Passenger from "views/Passenger/Passenger.jsx";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
-      password: "",
+      pid: null,
+      password: null,
       loging_status: null,
       name: null,
       show_error_login: false,
@@ -21,6 +22,7 @@ export default class Login extends Component {
     };
     this.processLog = this.processLog.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.inputTest = this.inputTest.bind(this);
   }
 
   processLog() {
@@ -28,11 +30,12 @@ export default class Login extends Component {
     var self = this;
 
     axios
-      .post("/login", {
-        username: this.state.username,
+      .post("/login/log", {
+        pid: this.state.pid,
         password: this.state.password
       })
       .then(function(res) {
+        console.log(res.data.address)
         if (res.data.auth === true) {
           self.setState({ loading: false });
           self.setState({ message: res.data.message });
@@ -54,6 +57,10 @@ export default class Login extends Component {
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+  inputTest(){
+    console.log(this.state.pid);
+    console.log(this.state.password);
   }
 
   handleSubmit = event => {
@@ -84,10 +91,10 @@ export default class Login extends Component {
                 <Label for="exampleEmail">Username</Label>
                 <Input
                   type="text"
-                  name="username"
+                  name="pid"
                   placeholder="Enter your username"
                   onChange={this.handleChange}
-                  value={this.state.username}
+                  value={this.state.pid}
                 />
               </FormGroup>
               <FormGroup>
@@ -115,6 +122,7 @@ export default class Login extends Component {
                   {this.state.show_error_login && (
                     <h3 className="login-error">{this.state.message}</h3>
                   )}
+                    <a href="Passenger">Register Here!!!</a>
                 </FormGroup>
               </div>
             </Form>

@@ -44,17 +44,25 @@ class Passenger extends React.Component {
             address: null,
             type: null,
             country: null,
-            password: null,
-            cpassword: null
+            password: '',
+            cpassword: ''
         };
         this.onKeydrop = this.onKeydrop.bind(this);
         this.onClickTest = this.onClickTest.bind(this);
         this.passwordConfirmation = this.passwordConfirmation.bind(this);
         this.clearFields = this.clearFields.bind(this);
         this.registerPassenger = this.registerPassenger.bind(this);
+        this.setLocaleCountry = this.setLocaleCountry.bind(this);
     }
 
     componentDidMount() {
+    }
+    setLocaleCountry(){
+        if(this.state.type === 'local'){
+            this.setState({
+                country: 'Sri Lanka'
+            })
+        }
     }
 
     registerPassenger() {
@@ -112,8 +120,8 @@ class Passenger extends React.Component {
         }
     }
 
-    onKeydrop(e) {
-        console.log(e.target.value)
+    onKeydrop(e){
+        console.log(e.target.value);
         this.setState({
             [e.target.name]: [e.target.value]
         });
@@ -141,8 +149,8 @@ class Passenger extends React.Component {
                     <Row>
                         <Col md={12} xs={12}>
                             <CardGroup>
-                                <Card body className="text-center" inverse
-                                    style={{ backgroundColor: '#efefef', borderColor: '#333' }}>
+                                <Card body className="text-center">
+
                                     <div className="card-content">
                                         <CardHeader>
                                             <h5 className="title">
