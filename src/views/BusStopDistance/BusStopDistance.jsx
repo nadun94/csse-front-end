@@ -79,6 +79,11 @@ class BusStopDistance extends React.Component {
     this.generateCombinationList
 
   }
+  handleClick(index, event) {
+    var qty = this.state.qty.slice();
+    qty[index] = event.target.value;
+    this.setState({ qty: qty });
+}
   generateCombinationList() {
   
     return (
@@ -88,7 +93,7 @@ class BusStopDistance extends React.Component {
 
               <FormInputs
 
-                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3","col-md-5  px-5 py-3"]}
+                ncols={["col-md-4  px-4 py-3", "col-md-4 px-5 py-3","col-md-4  px-5 py-3"]}
 
                 proprieties={[
                   {
@@ -96,8 +101,8 @@ class BusStopDistance extends React.Component {
                     inputProps: {
                       type: "text",
                       placeholder: "Enter bus stop one",
-                      name: "classFactor1",
-                      // value: this.state.classFactor1,
+                      // name: "classFactor1",
+                      value: item.key,
                       onChange: this.handleattributes
                     }
                   },
@@ -107,8 +112,8 @@ class BusStopDistance extends React.Component {
                       type: "text",
                       placeholder: "Enter bus stop two",
                       defaultValue: "",
-                      name: "busClass1",
-                      // value: this.state.busClass1,
+                      // name: "busClass1",
+                      value: item.value,
                       onChange: this.handleattributes
                     }
                   },
@@ -119,8 +124,9 @@ class BusStopDistance extends React.Component {
                       placeholder: "Enter distance",
                       defaultValue: "",
                       name: "busClass1",
+                      id:key,
                       // value: this.state.busClass1,
-                      // onChange:this.handleClick.bind(this, (key))
+                      onChange:this.handleClick.bind(this, (key))
                     }
                   }
 
