@@ -106,11 +106,6 @@ class Fee extends React.Component {
 
   // update fee algo
   UpdateFeeAlgo() {
-    alert(
-      'dfds'
-    )
-    console.log(this.state.priceFactor1)
-    console.log(this.state.priceFactor1[0])
     var self = this;
     axios.post('/fee-algo/update-fee-algo', {
       initialprice1: self.state.initialValue1,
