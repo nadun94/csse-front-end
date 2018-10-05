@@ -44,7 +44,7 @@ class Route extends React.Component {
             deslongitude: "",
             destnation:"",
             bus_stop_row:[],
-            bus_stop_row:[],
+           // bus_stop_row:[],
             busHaltID:"",
             busHaltName:"",
             town:"",
@@ -140,6 +140,38 @@ console.log(this.state.bus_stop_row)
         // }
 
     }
+    addBusHalts(){
+
+        axios.put('/route/update', {
+            RouteID: this.state.RouteID,
+            rorigin: this.state.rorigin,
+            rdestination:this.state.rdestination,
+            olatitude: this.state.olatitude,
+            olongitude: this.state.olongitude,
+            deslatitude: this.state.deslatitude,
+            deslongitude: this.state.deslongitude
+
+//                 }
+        })
+            .then(function (response) {
+                console.log(response);
+                alert(response.data);
+            }).then(() => {
+            this.clearFields();
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+        // }
+
+    }
+
+
+
+
+
+
+
 
     clearFields(){
         this.setState({
@@ -520,16 +552,17 @@ console.log(this.state.bus_stop_row)
                                 </CardBody>
                             </Card>
                         </Col>
-                        
+
                   
                     </Row>
+
                     <Row>
                         <Col md={12} xs={12}>
                         <Card body className="text-center" style={{ borderColor: '#333' }}>
                                         <div className="card-content">
                                             <CardHeader>
                                                 <h5 className="title">
-                                                    Delete Route
+                                                    Add Bus halts
                                                 </h5>
                                             </CardHeader>
                                             <CardBody>
@@ -538,7 +571,75 @@ console.log(this.state.bus_stop_row)
                                                         <div className="col-md-9">
                                                             <FormGroup>
                                                                 <Label for="exampleSelect">
-                                                                    RouteID
+                                                                    Bus HaltID
+                                                                </Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    name="RouteID"
+                                                                    id="rno"
+                                                                    value={this.state.RouteID}
+                                                                    onChange={this.handleattributes}
+                                                                >
+                                                                </Input>
+                                                            </FormGroup>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <FormGroup>
+                                                                <Label for="exampleSelect">
+                                                                    Town
+                                                                </Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    name="RouteID"
+                                                                    id="rno"
+                                                                    value={this.state.RouteID}
+                                                                    onChange={this.handleattributes}
+                                                                >
+                                                                </Input>
+                                                            </FormGroup>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <FormGroup>
+                                                                <Label for="exampleSelect">
+                                                                    Bus Halt Name
+                                                                </Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    name="RouteID"
+                                                                    id="rno"
+                                                                    value={this.state.RouteID}
+                                                                    onChange={this.handleattributes}
+                                                                >
+                                                                </Input>
+                                                            </FormGroup>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <FormGroup>
+                                                                <Label for="exampleSelect">
+                                                                    Bus Halt Latitude
+                                                                </Label>
+                                                                <Input
+                                                                    type="text"
+                                                                    name="RouteID"
+                                                                    id="rno"
+                                                                    value={this.state.RouteID}
+                                                                    onChange={this.handleattributes}
+                                                                >
+                                                                </Input>
+                                                            </FormGroup>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <FormGroup>
+                                                                <Label for="exampleSelect">
+                                                                    Bus Halt Longitiude
                                                                 </Label>
                                                                 <Input
                                                                     type="text"
@@ -557,9 +658,9 @@ console.log(this.state.bus_stop_row)
                                                             outline
                                                             color="primary"
                                                             size="lg"
-                                                            onClick={this.deleteRoutes}
+                                                            onClick={this.deleteRoutes}////////////////////////////////////////////////////////////
                                                         >
-                                                            Add Route
+                                                            Add Bus Halt
                                                         </Button>
                                                     </ButtonGroup>
 
@@ -573,6 +674,56 @@ console.log(this.state.bus_stop_row)
                                     </Card>
                         </Col>
                         </Row>
+                    <Row>
+                        <Col md={12} xs={12}>
+                            <Card body className="text-center" style={{ borderColor: '#333' }}>
+                                <div className="card-content">
+                                    <CardHeader>
+                                        <h5 className="title">
+                                            Delete Route
+                                        </h5>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <form>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            RouteID
+                                                        </Label>
+                                                        <Input
+                                                            type="text"
+                                                            name="RouteID"
+                                                            id="rno"
+                                                            value={this.state.RouteID}
+                                                            onChange={this.handleattributes}
+                                                        >
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+
+                                            <ButtonGroup className="pull-right">
+                                                <Button
+                                                    outline
+                                                    color="primary"
+                                                    size="lg"
+                                                    onClick={this.deleteRoutes}
+                                                >
+                                                    Delete Route
+                                                </Button>
+                                            </ButtonGroup>
+
+                                            <h3>
+                                                {" "}
+                                                <Badge color="info">{this.state.message}</Badge>
+                                            </h3>
+                                        </form>
+                                    </CardBody>
+                                </div>
+                            </Card>
+                        </Col>
+                    </Row>
 
                 </div>
             </div>
