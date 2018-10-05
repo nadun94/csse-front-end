@@ -57,19 +57,19 @@ class RouteHistoryView extends React.Component {
     }
 
     searchroute() {
-console.log(this.state.routeID)
+        console.log('hhh')
+        console.log(this.state.routeID)
         axios.get('/routing/getroutedata?routeid=' + this.state.routeID).then((response) => {
-            console.log(response.data.routeID)
+            console.log(response.data)
             this.setState({
-   
-            Origin: response.data.Origin,
-            Destination: response.data.Destination,
-            OriginLatitude: response.data.OriginLatitude,
-             OriginLongitude: response.data.OriginLongitude,
-              DesLatitude: response.data.DesLatitude, 
-              DesLongitude: response.data.DesLongitude
-        })
-    }).catch((err) => {
+                Origin: response.data.origin,
+                Destination: response.data.destination,
+                OriginLatitude: response.data.originLatitude,
+                OriginLongitude: response.data.originLongitude,
+                DesLatitude: response.data.desLatitude,
+                DesLongitude: response.data.desLongitude
+            })
+        }).catch((err) => {
             console.log(err);
         });
 
@@ -90,14 +90,14 @@ console.log(this.state.routeID)
 
 
     onKeydrop(e) {
-        console.log(e.target.value)
-        console.log(e.target.name)
+        console.log(e.target.value);
+        console.log(e.target.name);
         this.setState({
-            [e.target.name]:[e.target.value]
+            [e.target.name]: [e.target.value]
         });
     }
 
-    testState(){
+    testState() {
         console.log(this.state.routeID)
     }
 
@@ -132,8 +132,8 @@ console.log(this.state.routeID)
                                                             </Label>
                                                             <Input
                                                                 type="text"
-                                                                name=" routeID"
-                                                                id=" routeID"
+                                                                name="routeID"
+                                                                id="routeID"
                                                                 value={this.state.routeID}
                                                                 onChange={this.onKeydrop}
                                                             >
