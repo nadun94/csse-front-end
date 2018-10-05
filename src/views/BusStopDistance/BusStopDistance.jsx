@@ -154,7 +154,6 @@ class BusStopDistance extends React.Component {
          this.state.bus_stop_list.push(this.state.bus_stop_row)
       })
       // console.log(this.state.bus_stop_list)
-      console.log("fuck",this.state.bus_stop_row)
     var self = this;
     axios.post('/bus-fare/add-bus-stop-distance', {
       bs:this.state.bus_stop_row
@@ -183,13 +182,11 @@ class BusStopDistance extends React.Component {
       fetch("/bus-route/all-routes-only")
         .then(res => res.json())
         .then(data => {
-          console.log('fuck: ', data);
           self.setState({ route_array: data })
           let temp = self.state.route_array.map((item, key) => [
             <option value={item} >{item}</option>
           ])
           self.setState({ options: temp })
-          console.log(self.state.options)
 
         })
     } catch (error) {
