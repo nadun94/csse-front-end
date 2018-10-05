@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import classnames from "classnames";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from "react-responsive-carousel";
+import { Carousel } from "react-responsive-carousel";
 import {
     Card,
     Button,
@@ -27,9 +27,9 @@ import {
     Form,
     CustomInput
 } from "reactstrap";
-import {Tasks} from "components";
+import { Tasks } from "components";
 import moment from "moment";
-import {PanelHeader, FormInputs} from "components";
+import { PanelHeader, FormInputs } from "components";
 
 class Passenger extends React.Component {
     constructor(props) {
@@ -65,29 +65,29 @@ class Passenger extends React.Component {
         }
     }
 
-    registerPassenger(){
-        if(this.state.password[0] !== this.state.cpassword[0]){
+    registerPassenger() {
+        if (this.state.password[0] !== this.state.cpassword[0]) {
             alert('Password Do Not Match!!!');
 
-        }else{
+        } else {
             axios.post('/passenger/add', {
-                    pid: this.state.pid[0],
-                    name: this.state.name[0],
-                    email: this.state.email[0],
-                    sex: this.state.sex[0],
-                    phoneNo: this.state.phoneNo[0],
-                    address: this.state.address[0],
-                    type: this.state.type[0],
-                    country: this.state.country[0],
-                    password: this.state.password[0]
-//                 }
-                })
+                pid: this.state.pid[0],
+                name: this.state.name[0],
+                email: this.state.email[0],
+                sex: this.state.sex[0],
+                phoneNo: this.state.phoneNo[0],
+                address: this.state.address[0],
+                type: this.state.type[0],
+                country: this.state.country[0],
+                password: this.state.password[0]
+                //                 }
+            })
                 .then(function (response) {
                     console.log(response);
                     alert(response.data);
                 }).then(() => {
                     this.clearFields();
-            })
+                })
                 .catch(function (error) {
                     console.log(error);
                 });
@@ -95,7 +95,7 @@ class Passenger extends React.Component {
 
     }
 
-    clearFields(){
+    clearFields() {
         this.setState({
             pid: '',
             name: '',
@@ -111,10 +111,10 @@ class Passenger extends React.Component {
         });
     }
 
-    passwordConfirmation(){
+    passwordConfirmation() {
         console.log('conCalled');
         console.log(this.state.password);
-        if(this.state.password[0] !== this.state.cpassword[0]){
+        if (this.state.password[0] !== this.state.cpassword[0]) {
             alert('Password Do Not Match!!!');
 
         }
@@ -123,11 +123,11 @@ class Passenger extends React.Component {
     onKeydrop(e){
         console.log(e.target.value);
         this.setState({
-        [e.target.name]: [e.target.value]
+            [e.target.name]: [e.target.value]
         });
     }
 
-    onClickTest(){
+    onClickTest() {
         console.log(this.state.pid);
         console.log(this.state.name);
         console.log(this.state.email);
@@ -242,7 +242,7 @@ class Passenger extends React.Component {
                                                                 id="pphone"
                                                                 value={this.state.phoneNo}
                                                                 onChange={this.onKeydrop}
-                                                                // placeholder="klsd"
+                                                            // placeholder="klsd"
                                                             >
                                                             </Input>
                                                         </FormGroup>
@@ -364,7 +364,7 @@ class Passenger extends React.Component {
                                         </CardBody>
                                     </div>
                                 </Card>
-                                <Card inverse style={{backgroundColor: '#efefef', borderColor: '#333'}}>
+                                <Card inverse style={{ backgroundColor: '#efefef', borderColor: '#333' }}>
                                     <div className="card-content">
                                         <CardHeader>
                                             <h5 className="title">
