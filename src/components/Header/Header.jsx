@@ -5,7 +5,8 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+    Button
 } from "reactstrap";
 
 class Header extends React.Component {
@@ -17,6 +18,7 @@ class Header extends React.Component {
       dropdownOpen: false
     };
     this.toggle = this.toggle.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   toggle() {
@@ -43,6 +45,11 @@ class Header extends React.Component {
         color: "transparent"
       });
     }
+  }
+
+  logout(){
+    sessionStorage.clear();
+    window.location.reload();
   }
   componentDidMount() {
     window.addEventListener("resize", this.updateColor.bind(this));
@@ -111,7 +118,11 @@ class Header extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown> */}
+
             </Nav>
+              <Button bsSize="large" active onClick={this.logout}>
+                  Logout
+              </Button>
           </Collapse>
         </Navbar>
       </div>

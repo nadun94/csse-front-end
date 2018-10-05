@@ -16,11 +16,11 @@ var dashRoutes = [
     name: "Fee",
     component: Fee
   },
-  {
-    path: "/passenger",
-    name: "Passenger",
-    component: Passenger
-  },
+  // {
+  //   path: "/passenger",
+  //   name: "Passenger",
+  //   component: Passenger
+  // },
   {
     path: "/bus-stop-distance",
     name: "Bus Stop Distance",
