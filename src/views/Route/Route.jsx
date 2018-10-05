@@ -180,8 +180,13 @@ console.log(this.state.bus_stop_row)
                 <div className="container-fluid">
                     <Row>
                         <Col md={12} xs={12}>
-                            <CardGroup>
-                                <div>
+                            <Card>
+                                <CardHeader>
+                                    Mange Bus Routes
+                                </CardHeader>
+                                <CardBody>
+                                <CardGroup>
+                               
                                     <Card body className="text-center" style={{ borderColor: '#333' }}>
                                         <div className="card-content">
                                         <CardHeader>
@@ -311,14 +316,14 @@ console.log(this.state.bus_stop_row)
                                                         </div>
                                                     </div>
                                                 <ButtonGroup className="pull-right">
-                                                    <Button
+                                                    {/* <Button
                                                         outline
                                                         color="primary"
                                                         size="lg"
                                                         onClick={this.addRoutes}
                                                     >
                                                         Add Route
-                                                    </Button>
+                                                    </Button> */}
                                                     <Button
                                                         outline
                                                         color="primary"
@@ -337,10 +342,10 @@ console.log(this.state.bus_stop_row)
                                         </CardBody>
                                     </div>
                                 </Card>
-                                </div>
+                             
                                 <br />
                                 {/* second card */}
-                                <div>
+                              
                                 <Card body className="text-center" style={{ borderColor: '#333' }}>
                                     <div className="card-content">
                                         <CardHeader>
@@ -476,7 +481,7 @@ console.log(this.state.bus_stop_row)
                                                         size="lg"
                                                         onClick={this.updateRoutes}
                                                     >
-                                                        Add Route
+                                                        Add Bus Stop
                                                     </Button>
                                                     <Button
                                                         outline
@@ -496,12 +501,31 @@ console.log(this.state.bus_stop_row)
                                         </CardBody>
                                     </div>
                                 </Card>
-                                </div>
+                            
 
-                                <br />
-                                {/* 3rd Card*/}
-                                <div>
-                                    <Card body className="text-center" style={{ borderColor: '#333' }}>
+                        
+                                
+                            </CardGroup>
+                            <ButtonGroup className="pull-right">
+                                                    <Button
+                                                        outline
+                                                        color="primary"
+                                                        size="lg"
+                                                        onClick={this.updateRoutes}
+                                                    >
+                                                        Add Route
+                                                    </Button>
+                                                
+                                                </ButtonGroup>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        
+                  
+                    </Row>
+                    <Row>
+                        <Col md={12} xs={12}>
+                        <Card body className="text-center" style={{ borderColor: '#333' }}>
                                         <div className="card-content">
                                             <CardHeader>
                                                 <h5 className="title">
@@ -511,7 +535,7 @@ console.log(this.state.bus_stop_row)
                                             <CardBody>
                                                 <form>
                                                     <div className="row">
-                                                        <div className="col-md-5">
+                                                        <div className="col-md-9">
                                                             <FormGroup>
                                                                 <Label for="exampleSelect">
                                                                     RouteID
@@ -547,10 +571,8 @@ console.log(this.state.bus_stop_row)
                                             </CardBody>
                                         </div>
                                     </Card>
-                                </div>
-                            </CardGroup>
                         </Col>
-                    </Row>
+                        </Row>
 
                 </div>
             </div>
