@@ -99,7 +99,7 @@ class Addbus extends React.Component {
 
    await     this.setState({
            // pid:sessionStorage.getItem("pid")
-           pid:'961623200V'  })
+           pid:sessionStorage.getItem("pid")  })
     
      await this.accountbalancepid()
        
