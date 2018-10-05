@@ -75,28 +75,33 @@ class Addbus extends React.Component {
     // add bus
     addbussave() {
         var self = this;
-        console.log("add");
+        console.log(this.state.busID);
+        console.log(this.state.route);
+        if(this.state.busID==null||this.state.make==null||this.state.type==null||this.state.OwnerName==null||this.state.route==null){
+            alert("please fill all text boxes")
+        }
+       
+       
+        else{
         axios.post('/Bus_details/add', {
             
             
-            busID: self.state.busID,
-            make: self.state.make,
-            type: self.state.type,
-            route: self.state.route,
-            OwnerName: self.state.OwnerName,
+            busID: this.state.busID,
+            make: this.state.make,
+            type: this.state.type,
+            route: this.state.route,
+            OwnerName: this.state.OwnerName,
 
            
         })
-            .then(function (res) {
-                // if (res.data.postcheck_pass == "true") {
-                //   self.setState({ postcheck_pass: res.data.postcheck_pass }
-                // else {
-
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            })
-
+        .then(function (response) {
+            console.log(response);
+            alert(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
 
 
 
@@ -282,14 +287,7 @@ class Addbus extends React.Component {
                                     >
                                         save
                       </Button>
-                                    <Button
-                                        outline
-                                        color="warning"
-                                        size="lg"
-                                        onClick={this.addbussave}
-                                    >
-                                        Delete
-                      </Button>
+                                   
                                 </ButtonGroup>
                             </CardBody>
                         </Card>
