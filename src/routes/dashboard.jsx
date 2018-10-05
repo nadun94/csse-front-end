@@ -3,6 +3,7 @@ import Fee from '../views/Fee/Fee.jsx';
 import Passenger from "views/Passenger/Passenger.jsx";
 import BusStopDistance from '../views/BusStopDistance/BusStopDistance.jsx';
 import Addbus from "views/AddBus/Addbus.jsx";
+import AccountDetails from "views/AccountDetails/AccountDetails.jsx"
 var dashRoutes = [
   {
     path: "/home",
@@ -29,6 +30,11 @@ var dashRoutes = [
     path: "/addbus",
     name: "Addbus",
     component: Addbus
+},
+{
+  path: "/AccountDetails",
+  name: "AccountDetails",
+  component: AccountDetails
 },
 
   { redirect: true, path: "/", pathTo: "/home", name: "Home" }

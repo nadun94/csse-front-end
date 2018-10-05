@@ -48,7 +48,7 @@ class Addbus extends React.Component {
         this.handleattributes = this.handleattributes.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
-      
+
         this.addbussave = this.addbussave.bind(this);
         this.clear = this.clear.bind(this);
 
@@ -70,38 +70,38 @@ class Addbus extends React.Component {
         console.log("clear")
 
     }
-    
+
 
     // add bus
     addbussave() {
         var self = this;
         console.log(this.state.busID);
         console.log(this.state.route);
-        if(this.state.busID==null||this.state.make==null||this.state.type==null||this.state.OwnerName==null||this.state.route==null){
+        if (this.state.busID == null || this.state.make == null || this.state.type == null || this.state.OwnerName == null || this.state.route == null) {
             alert("please fill all text boxes")
         }
-       
-       
-        else{
-        axios.post('/Bus_details/add', {
-            
-            
-            busID: this.state.busID,
-            make: this.state.make,
-            type: this.state.type,
-            route: this.state.route,
-            OwnerName: this.state.OwnerName,
 
-           
-        })
-        .then(function (response) {
-            console.log(response);
-            alert(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
+
+        else {
+            axios.post('/Bus_details/add', {
+
+
+                busID: this.state.busID,
+                make: this.state.make,
+                type: this.state.type,
+                route: this.state.route,
+                OwnerName: this.state.OwnerName,
+
+
+            })
+                .then(function (response) {
+                    console.log(response);
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
 
 
 
@@ -205,67 +205,11 @@ class Addbus extends React.Component {
 
                                                                 ]} />
 
-                                                            <FormInputs
-
-                                                                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3"]}
-
-                                                                proprieties={[
-                                                                    {
-                                                                        label: "Bus Type",
-                                                                        inputProps: {
-                                                                            type: "text",
-                                                                            placeholder: "Enter Bus Type",
-                                                                            name: "type",
-                                                                            value: this.state.type,
-                                                                            onChange: this.handleattributes
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        label: "Bus Owner Name",
-                                                                        inputProps: {
-                                                                            type: "text",
-                                                                            placeholder: "Enter bus Owner Name",
-                                                                            defaultValue: "",
-                                                                            name: "OwnerName",
-                                                                            value: this.state.OwnerName,
-                                                                            onChange: this.handleattributes
-                                                                        }
-                                                                    }
-
-                                                                ]} />
-                                                            <div className="text-center">
-                                                                <div className="row">
-                                                                    <div className="col-md-5">
-                                                                        <FormGroup>
-                                                                            <Label for="exampleSelect">
-                                                                                Bus Route
-                                                                            </Label>
-                                                                            <Input
-                                                                                type="select"
-                                                                                name="route"
-                                                                                id="route"
-                                                                                onChange={this.handleattributes} value={this.state.route}
-                                                                            >
-                                                                                <option value="">Select a bus route</option>
-                                                                                {this.state.options}
-
-                                                                            </Input>
-                                                                        </FormGroup>
-                                                                    </div>
-                                                                </div>
+                                                        
+                                                            
                                                             </div>
-                                                            <ButtonGroup className="pull-right">
 
-                                                                <Button
-                                                                    outline
-                                                                    color="primary"
-                                                                    size="lg"
-                                                                    onClick={this.clear}
-                                                                >
-                                                                    Clear
-                      </Button>
-                                                            </ButtonGroup>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <h3>
                                                         {" "}
@@ -287,7 +231,7 @@ class Addbus extends React.Component {
                                     >
                                         save
                       </Button>
-                                   
+
                                 </ButtonGroup>
                             </CardBody>
                         </Card>
