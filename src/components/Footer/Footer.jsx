@@ -24,7 +24,7 @@ class Footer extends React.Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              SE-we-07
+              SE-we-12
             </a>. All Rights Reserved.
 
           </div>

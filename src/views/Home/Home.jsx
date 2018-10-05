@@ -39,6 +39,8 @@ import car2 from "../../assets/img/car2.png";
 import n1 from "../../assets/img/n1.jpg";
 import n2 from "../../assets/img/n2.jpg";
 import n3 from "../../assets/img/n3.jpg";
+import n4 from "../../assets/img/n4.jpg";
+import n5 from "../../assets/img/n5.jpg";
 import { PanelHeader, FormInputs } from "components";
 
 const slideImages = [n1, n2, n3];
@@ -123,7 +125,7 @@ class Cars extends React.Component {
                 <Carousel>
                 <div>
                     <img src={n1} />
-                    <p className="legend">To comfort you</p>
+                    <p className="legend">Take you home safely</p>
                 </div>
                 <div>
                     <img src={n2}  />
@@ -131,7 +133,15 @@ class Cars extends React.Component {
                 </div>
                 <div>
                     <img src={n3}  />
-                    <p className="legend">Make your home</p>
+                    <p className="legend">More convinetn ever</p>
+                </div>
+                <div>
+                    <img src={n4}  />
+                    <p className="legend">New experience</p>
+                </div>
+                <div>
+                    <img src={n5}  />
+                    <p className="legend">Our service</p>
                 </div>
             </Carousel>
                 </div>
@@ -142,268 +152,20 @@ class Cars extends React.Component {
           <Row>
             <Col md={12} xs={12}>
               <CardGroup>
-                <Card body className="text-center"  inverse style={{ backgroundColor: '#efefef', borderColor: '#333' }}>
+                <Card body className="text-center"   style={{ backgroundColor: '#efefef', borderColor: '#333' }}>
                   <div className="card-content">
                     <CardHeader>
                       <h5 className="title">
                         {" "}
-                        Find the best rental car rates in {this.state.city}{" "}
+                        Welcome to Sri Lanka transport service {this.state.city}{" "}
                       </h5>
                     </CardHeader>
                     <CardBody>
-                      <form>
-                        <div className="row">
-                          <div className="col-md-5">
-                            <FormGroup>
-                              <Label for="exampleSelect">
-                                Pick-Up Location
-                              </Label>
-                              <Input
-                                type="select"
-                                name="select"
-                                id="exampleSelect"
-                              >
-                                <option>Colombo, Sri Lanka (CMB)</option>
-                                <option>San Francisco, CA (SFO)</option>
-                                <option>New York City Airports (NYC)</option>
-                                <option>Sydney, Australia (SYD)</option>
-                                <option>Denver, CO (DEN)</option>
-                                <option>Tokyo Airports (TYO)</option>
-                                <option>Berlin Airports (BER)</option>
-                                <option>Beijing, China (PEK)</option>
-                                <option>London, United Kingdom (LHR)</option>
-                                <option>Amsterdam, Netherlands (AMS)</option>
-                              </Input>
-                            </FormGroup>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-5">
-                            <FormGroup>
-                              <Label for="exampleSelect">
-                                Drop-Off Location
-                              </Label>
-                              <Input
-                                type="select"
-                                name="select"
-                                id="exampleSelect"
-                              >
-                                <option>Enter or Select Place</option>
-                                <option>Colombo, Sri Lanka (CMB)</option>
-                                <option>San Francisco, CA (SFO)</option>
-                                <option>New York City Airports (NYC)</option>
-                                <option>Sydney, Australia (SYD)</option>
-                                <option>Denver, CO (DEN)</option>
-                                <option>Tokyo Airports (TYO)</option>
-                                <option>Berlin Airports (BER)</option>
-                                <option>Beijing, China (PEK)</option>
-                                <option>London, United Kingdom (LHR)</option>
-                                <option>Amsterdam, Netherlands (AMS)</option>
-                              </Input>
-                            </FormGroup>
-                          </div>
-                        </div>
-
-                        <div className="row">
-                          <div className="col-md-5">
-                            <FormGroup>
-                              <Label for="exampleSelect">Pick-Up</Label>
-                              <DatePicker
-                                selected={this.state.date}
-                                onChange={this.handleChange}
-                                showTimeSelect
-                                dateFormat="LLL"
-                              />
-                            </FormGroup>
-                          </div>
-
-                          <div className="col-md-5">
-                            <FormGroup>
-                              <Label for="exampleSelect">Pick-Up</Label>
-                              <DatePicker
-                                selected={this.state.date}
-                                onChange={this.handleChange}
-                                showTimeSelect
-                                dateFormat="LLL"
-                              />
-                            </FormGroup>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-5">
-                            <FormGroup>
-                              <Label for="exampleSelect">
-                                Drop-Off Location
-                              </Label>
-                              <Input
-                                type="select"
-                                name="select"
-                                id="exampleSelect"
-                              >
-                                <option
-                                  value="Economy"
-                                  data-car-type-id="Economy"
-                                >
-                                  Economy
-                                </option>
-                                <option
-                                  value="Compact"
-                                  data-car-type-id="Compact"
-                                >
-                                  Compact
-                                </option>
-                                <option
-                                  value="Midsize"
-                                  data-car-type-id="Midsize"
-                                >
-                                  Midsize
-                                </option>
-                                <option
-                                  value="Standard"
-                                  data-car-type-id="Standard"
-                                >
-                                  Standard
-                                </option>
-                                <option
-                                  value="Full-size"
-                                  data-car-type-id="Full-size"
-                                >
-                                  Full-size
-                                </option>
-                                <option
-                                  value="Premium"
-                                  data-car-type-id="Premium"
-                                >
-                                  Premium
-                                </option>
-                                <option
-                                  value="Luxury"
-                                  data-car-type-id="Luxury"
-                                >
-                                  Luxury
-                                </option>
-                                <option
-                                  value="Convertible"
-                                  data-car-type-id="Convertible"
-                                >
-                                  Convertible
-                                </option>
-                                <option
-                                  value="Minivan"
-                                  data-car-type-id="Minivan"
-                                >
-                                  Minivan
-                                </option>
-                                <option value="SUV" data-car-type-id="SUV">
-                                  SUV
-                                </option>
-                                <option
-                                  value="Sports car"
-                                  data-car-type-id="Sports car"
-                                >
-                                  Sportscar
-                                </option>
-                              </Input>
-                            </FormGroup>
-                          </div>
-                        </div>
-
-                        <ButtonGroup className="pull-right">
-                          <Button
-                            outline
-                            color="primary"
-                            size="lg"
-                            onClick={this.clear}
-                          >
-                            Clear
-                          </Button>
-                        </ButtonGroup>
-
-                        <h3>
-                          {" "}
-                          <Badge color="info">{this.state.message}</Badge>
-                        </h3>
-                      </form>
+ 
                     </CardBody>
                   </div>
                 </Card>
-                <Card  inverse style={{ backgroundColor:  '#efefef', borderColor: '#333' }}> 
-                  <div className="card-content">
-                    <CardHeader>
-                      <h5 className="title">
-                        Click on multiple sites to get the lowest prices
-                      </h5>
-                    </CardHeader>
-                    <CardBody>
-                      {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
-                      {/* <CardText>This is a wider card with supporting text below as a natural lead-in to additional content.</CardText> */}
-
-                      <FormGroup>
-                        <div>
-                          <span className="carlogo">
-                            {" "}
-                            <CustomInput
-                              type="checkbox"
-                              id="exampleCustomCheckbox"
-                              size="lg"
-                            />
-                            <img
-                              className="carlogo-size"
-                              src={img_autorent}
-                              alt="fireSpot"
-                            />
-                          </span>
-                          <span className="carlogo">
-                            {" "}
-                            <CustomInput
-                              type="checkbox"
-                              id="exampleCustomCheckbox"
-                              size="lg"
-                            />
-                            <img
-                              className="carlogo-size"
-                              src={img_trip}
-                              alt="fireSpot"
-                            />
-                          </span>
-                          <span className="carlogo">
-                            {" "}
-                            <CustomInput
-                              type="checkbox"
-                              id="exampleCustomCheckbox"
-                              size="lg"
-                            />
-                            <img
-                              className="carlogo-size"
-                              src={img_kaya}
-                              alt="fireSpot"
-                            />
-                          </span>
-                          <span className="carlogo">
-                            {" "}
-                            <CustomInput
-                              type="checkbox"
-                              id="exampleCustomCheckbox"
-                              size="lg"
-                            />
-                            <img
-                              className="carlogo-size"
-                              src={img_hot}
-                              alt="fireSpot"
-                            />
-                          </span>
-                        </div>
-                      </FormGroup>
-                      <Button
-                        color="primary"
-                        size="lg"
-                        onClick={this.selectRates}
-                      >
-                        Compare Selected
-                      </Button>
-                    </CardBody>
-                  </div>
-                </Card>
+             
               </CardGroup>
             </Col>
           </Row>
