@@ -147,14 +147,14 @@ class BusStopDistance extends React.Component {
 
   // update BusStopDistance algo
   async addBusStopDistance() {
+    await this.setState({bus_stop_row:[]})
       await this.state.combination.map((item,key) => {
         // this.setState({bus_stop_row:{busHalt1:item.key,busHalt2:item.value,distance:this.state.distance[key]}})
         this.state.bus_stop_row.push({"busHalt1":item.key,"busHalt2":item.value,"distance":this.state.distance[key]})
-        // this.state.bus_stop_row.push({item.key,"busHalt2":item.value,"distance":this.state.distance[key]})
          this.state.bus_stop_list.push(this.state.bus_stop_row)
       })
       // console.log(this.state.bus_stop_list)
-      console.log(this.state.bus_stop_row)
+      console.log("fuck",this.state.bus_stop_row)
     var self = this;
     axios.post('/bus-fare/add-bus-stop-distance', {
       bs:this.state.bus_stop_row
