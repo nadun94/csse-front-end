@@ -36,7 +36,7 @@ export default class Login extends Component {
         password: this.state.password
       })
       .then(function(res) {
-        console.log(res.data.name)
+        console.log(res.data)
           console.log(res.data.auth)
         if (res.data.auth === true) {
           self.setState({ loading: false });

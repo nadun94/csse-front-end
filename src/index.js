@@ -16,7 +16,7 @@ import indexRoutes from "routes/index.jsx";
 const hist = createBrowserHistory();
 
 function checkLogin() {
-  if (!sessionStorage.getItem("loging_status")) {
+  if (sessionStorage.getItem("loging_status")) {
       return (
 
           <switch>

@@ -59,7 +59,6 @@ class Demo extends React.Component {
 
   // add a new journey
   startJourney() {
-
     var self = this;
     axios.post('/journey/journey-start', {
       bus_id: self.state.busID,
@@ -67,14 +66,17 @@ class Demo extends React.Component {
 
     })
       .then(function (res) {
+        if(res.status === 200){
+          self.setState({jid:res.data})
+          alert( "Succssfully started the journey.")
+          // self.setState({ message: "Succssfully started the journey."})
+        }else{
+          alert( "Journey record saving failed.")
+        }
       
-      self.setState({jid:res})
-          // self.setState({ message: res.data. })
-          console.log(res.data)
-  
-       
+          
       }).catch((error) => {
-        console.log(error)
+        console.log(error.res)
       })
 
 
