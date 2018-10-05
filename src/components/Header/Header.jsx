@@ -118,10 +118,11 @@ class Header extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown> */}
-                <Button bsSize="large" active onClick={this.logout}>
-                    Logout
-                </Button>
+
             </Nav>
+              <Button bsSize="large" active onClick={this.logout}>
+                  Logout
+              </Button>
           </Collapse>
         </Navbar>
       </div>
