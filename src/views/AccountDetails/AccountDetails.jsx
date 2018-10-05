@@ -33,14 +33,8 @@ class Addbus extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
-            busID: null,
-            make: null,
-            type: null,
-            route: null,
-            OwnerName: null,
-            message: "",
-            options: null
+            pid:"",
+            amount_available:null
 
 
         };
@@ -49,8 +43,10 @@ class Addbus extends React.Component {
         this.handleChange = this.handleChange.bind(this);
 
 
-        this.addbussave = this.addbussave.bind(this);
+        this.addbussave = this.GetLoan.bind(this);
         this.clear = this.clear.bind(this);
+        this.accountbalancepid=this.accountbalancepid.bind(this);
+        this.GetLoan=this.GetLoan.bind(this)
 
 
     }
@@ -59,12 +55,7 @@ class Addbus extends React.Component {
 
     clear() {
         this.setState({
-            busID: "",
-            make: "",
-            type: "",
-            route: "",
-            OwnerName: "",
-            message: ""
+           pid:"",
 
         })
         console.log("clear")
@@ -73,30 +64,27 @@ class Addbus extends React.Component {
 
 
     // add bus
-    addbussave() {
+    GetLoan() {
         var self = this;
-        console.log(this.state.busID);
-        console.log(this.state.route);
-        if (this.state.busID == null || this.state.make == null || this.state.type == null || this.state.OwnerName == null || this.state.route == null) {
-            alert("please fill all text boxes")
-        }
+       
 
 
-        else {
-            axios.post('/Bus_details/add', {
+    
+            axios.post('/Busloan/applyloan', {
 
 
-                busID: this.state.busID,
-                make: this.state.make,
-                type: this.state.type,
-                route: this.state.route,
-                OwnerName: this.state.OwnerName,
+                pid: this.state.pid,
+                amount_available:this.state.amount_available
+              
 
 
             })
                 .then(function (response) {
                     console.log(response);
                     alert(response.data);
+                  
+                }).then(()=>{
+                    this.accountbalancepid()
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -105,29 +93,40 @@ class Addbus extends React.Component {
 
 
 
-    }
 
-    componentDidMount() {
+  async  componentDidMount() {
+    
+
+   await     this.setState({
+           // pid:sessionStorage.getItem("pid")
+           pid:'961623200V'  })
+    
+     await this.accountbalancepid()
+       
+console.log(this.state.pid)
+    }
+    accountbalancepid() {
         var self = this;
-
+        console.log(this.state.pid)
         try {
-            fetch("/bus-route/all-routes-only")
-                .then(res => res.json())
-                .then(data => {
-                    console.log('fuck: ', data);
-                    self.setState({ route_array: data })
-                    let temp = self.state.route_array.map((item, key) => [
-                        <option value={item} >{item}</option>
-                    ])
-                    self.setState({ options: temp })
-                    console.log(self.state.options)
-
-                })
+           // console.log(self.state.pid)
+          let url = "passenger/getSpecPassenger?pid=" + this.state.pid;
+          console.log(url)
+          fetch(url)
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+            console.log(data.amountAvailable)
+              self.setState({ amount_available: data.amountAvailable })
+              console.log(this.state.amount_available);
+    
+            });
         } catch (error) {
-            console.log(error)
-
+          console.log(error)
         }
-    }
+       
+    
+      }
     handleChange(date) {
         this.setState({
             startDate: date
@@ -158,7 +157,7 @@ class Addbus extends React.Component {
                             <CardHeader>
                                 <h5 className="title">
                                     {" "}
-                                    Add Bus To System{" "}
+                                    Account Deials and getLoan {" "}
                                 </h5>
 
                             </CardHeader>
@@ -169,7 +168,7 @@ class Addbus extends React.Component {
                                             <CardHeader>
                                                 <h5 className="title">
                                                     {" "}
-                                                    Bus Details{" "}
+                                                    Account Details{" "}
                                                 </h5>
                                             </CardHeader>
                                             <CardBody>
@@ -183,23 +182,25 @@ class Addbus extends React.Component {
 
                                                                 proprieties={[
                                                                     {
-                                                                        label: "Bus Number",
+                                                                        label: "account id number",
                                                                         inputProps: {
                                                                             type: "text",
-                                                                            placeholder: "Enter Bus Number",
-                                                                            name: "busID",
-                                                                            value: this.state.busID,
-                                                                            onChange: this.handleattributes
+                                                                            placeholder: "",
+                                                                            name: "pid",
+                                                                            value: this.state.pid,
+                                                                            onChange: this.handleattributes,
+                                                                            disabled:true
                                                                         }
                                                                     },
                                                                     {
-                                                                        label: "Bus Brand Name",
+                                                                        label: "account balance is",
                                                                         inputProps: {
                                                                             type: "text",
-                                                                            placeholder: "Enter Bus Brand Name",
-                                                                            name: "make",
-                                                                            value: this.state.make,
-                                                                            onChange: this.handleattributes
+                                                                            placeholder: "",
+                                                                            name: "amount_available",
+                                                                            value: this.state.amount_available,
+                                                                            onChange: this.handleattributes,
+                                                                            disabled:true
                                                                         }
                                                                     }
 
@@ -227,9 +228,9 @@ class Addbus extends React.Component {
                                         outline
                                         color="primary"
                                         size="lg"
-                                        onClick={this.addbussave}
+                                        onClick={this.GetLoan}
                                     >
-                                        save
+                                        Get a Loan
                       </Button>
 
                                 </ButtonGroup>
