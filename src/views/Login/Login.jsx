@@ -5,6 +5,7 @@ import CogIcon from "react-icons/lib/fa/cogs";
 import axios from "axios";
 import { PropagateLoader } from "react-spinners";
 import "../../assets/css/tasks.css";
+import { Router, Route, Switch, Redirect,Link} from "react-router-dom";
 import Passenger from "views/Passenger/Passenger.jsx";
 
 export default class Login extends Component {
@@ -35,26 +36,33 @@ export default class Login extends Component {
         password: this.state.password
       })
       .then(function(res) {
-        console.log(res.data.address)
+        console.log(res.data.name)
+          console.log(res.data.auth)
         if (res.data.auth === true) {
           self.setState({ loading: false });
           self.setState({ message: res.data.message });
           sessionStorage.setItem("loging_status", res.data.auth);
-          sessionStorage.setItem("user", res.data.user.username);
+          sessionStorage.setItem("user", res.data.name);
+          sessionStorage.setItem("pid", res.data.pid);
           self.setState({ show_error_login: false });
           window.location.reload();
         } else {
           self.setState({ loading: false });
           self.setState({ show_error_login: true });
+          self.setState({message: res.data.message})
+            alert(res.data.message);
         }
-      })
+      }).then(() => {
+        console.log(sessionStorage.getItem("login_status"))
+        console.log(sessionStorage.getItem("user"))
+    })
       .catch(function(error) {
         console.log(error);
       });
   }
-  validateForm() {
-    return this.state.username.length > 0 && this.state.password.length > 0;
-  }
+  // validateForm() {
+  //   return this.state.username.length > 0 && this.state.password.length > 0;
+  // }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -118,11 +126,11 @@ export default class Login extends Component {
                   >
                     Login
                   </Button>
-
+               <Link to="/passenger"> Register</Link>
                   {this.state.show_error_login && (
                     <h3 className="login-error">{this.state.message}</h3>
                   )}
-                    <a href="Passenger">Register Here!!!</a>
+
                 </FormGroup>
               </div>
             </Form>

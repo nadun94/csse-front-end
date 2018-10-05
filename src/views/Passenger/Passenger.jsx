@@ -107,7 +107,7 @@ class Passenger extends React.Component {
             type: '',
             country: '',
             password: '',
-            cpassword: ''
+            cpassword: null
         });
     }
 
@@ -143,258 +143,249 @@ class Passenger extends React.Component {
     //render start******************************************************
     render() {
         return (
-            <div>
-                {/* <PanelHeader size="sm" /> */}
-                <div className="container-fluid">
-                    <Row>
-                        <Col md={12} xs={12}>
-                            <CardGroup>
-                                <Card body className="text-center">
+            <div classNames="container-fluid">
 
-                                    <div className="card-content">
-                                        <CardHeader>
-                                            <h5 className="title">
-                                                Passenger Details
-                                            </h5>
-                                        </CardHeader>
-                                        <CardBody>
-                                            <form>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                NIC or Passport Number:
-                                                            </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="pid"
-                                                                id="npno"
-                                                                value={this.state.pid}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Name:
-                                                            </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="name"
-                                                                id="pname"
-                                                                value={this.state.name}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                E-Mail:
-                                                            </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="email"
-                                                                id="pemail"
-                                                                value={this.state.email}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Sex:
-                                                            </Label>
-                                                            <Input
-                                                                type="select"
-                                                                name="sex"
-                                                                id="psex"
-                                                                value={this.state.sex}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                                <option>Select Sex...</option>
-                                                                <option value='male'>Male</option>
-                                                                <option value='female'>Female</option>
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Phone Number:
-                                                            </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="phoneNo"
-                                                                id="pphone"
-                                                                value={this.state.phoneNo}
-                                                                onChange={this.onKeydrop}
-                                                                // placeholder="klsd"
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Address:
-                                                            </Label>
-                                                            <Input
-                                                                type="textarea"
-                                                                name="address"
-                                                                id="padrs"
-                                                                value={this.state.address}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Type:
-                                                            </Label>
-                                                            <Input
-                                                                type="select"
-                                                                name="type"
-                                                                id="ptype"
-                                                                value={this.state.type}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                                <option>Select Type...</option>
-                                                                <option value='foreign'>Foreign</option>
-                                                                <option value='local'>Local</option>
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Country:
-                                                            </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="country"
-                                                                id="pcntry"
-                                                                value={this.state.country}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Password:
-                                                            </Label>
-                                                            <Input
-                                                                type="password"
-                                                                name="password"
-                                                                id="ppswrd"
-                                                                value={this.state.password}
-                                                                onChange={this.onKeydrop}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                Confirm Password:
-                                                            </Label>
-                                                            <Input
-                                                                type="password"
-                                                                name="cpassword"
-                                                                id="cppswrd"
-                                                                value={this.state.cpassword}
-                                                                onChange={this.onKeydrop}
-                                                                onBlur={this.passwordConfirmation}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <ButtonGroup className="pull-right">
-                                                    <Button
-                                                        outline
-                                                        color="primary"
-                                                        size="lg"
-                                                        onClick={this.registerPassenger}
-                                                    >
-                                                        Register
-                                                    </Button>
-                                                    <Button
-                                                        outline
-                                                        color="primary"
-                                                        size="lg"
-                                                        onClick={this.clearFields}
-                                                    >
-                                                        Clear
-                                                    </Button>
-                                                </ButtonGroup>
 
-                                                <h3>
+                <Row>
+                    <Col md={12} xs={12}>
+
+                        <Card>
+                            <CardHeader>
+                                <h5 className="title">
+                                    {" "}
+                                     Passenger Details{" "}
+                                </h5>
+
+                            </CardHeader>
+                            <CardBody>
+                                <CardGroup>
+                                    <Card body className="text-center" style={{ borderColor: '#333' }}>
+                                        <div className="card-content">
+                                            <CardHeader>
+                                                <h5 className="title">
                                                     {" "}
-                                                    <Badge color="info">{this.state.message}</Badge>
-                                                </h3>
-                                            </form>
-                                        </CardBody>
-                                    </div>
-                                </Card>
-                                <Card inverse style={{backgroundColor: '#efefef', borderColor: '#333'}}>
-                                    <div className="card-content">
-                                        <CardHeader>
-                                            <h5 className="title">
-                                                Click on multiple sites to get the lowest prices
-                                            </h5>
-                                        </CardHeader>
-                                        <CardBody>
-                                            {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
-                                            {/* <CardText>This is a wider card with supporting text below as a natural lead-in to additional content.</CardText> */}
+                                                    Enter Your Details Here{" "}
+                                                </h5>
+                                            </CardHeader>
+                                            <CardBody>
+                                                <form>
+                                                    <div>
+                                                        <div className="col-md-5,col-md-5">
 
-                                            <FormGroup>
-                                                <div>
+                                                            <FormInputs
 
-                                                </div>
-                                            </FormGroup>
-                                            <Button
-                                                color="primary"
-                                                size="lg"
-                                                onClick={this.onClickTest}
-                                            >
-                                                Compare Selected
-                                            </Button>
-                                        </CardBody>
-                                    </div>
-                                </Card>
-                            </CardGroup>
-                        </Col>
-                    </Row>
+                                                                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3"]}
 
-                </div>
+                                                                proprieties={[
+                                                                    {
+                                                                        label: "NIC or Passport Number",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter NIC or Passport",
+                                                                            name: "pid",
+                                                                            id: "npno",
+                                                                            value: this.state.pid,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        label: "Name",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter Name",
+                                                                            name: "name",
+                                                                            id:"pname",
+                                                                            value: this.state.name,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+                                                                    }
+
+                                                                ]} />
+
+                                                            <FormInputs
+
+                                                                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3"]}
+
+                                                                proprieties={[
+                                                                    {
+                                                                        label: "E-Mail",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter E-mail",
+                                                                            name: "email",
+                                                                            id:"pemail",
+                                                                            value: this.state.email,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        label: "Phone Number",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter Phone Number",
+                                                                            // defaultValue: "",
+                                                                            name: "phoneNo",
+                                                                            value: this.state.phoneNo,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+
+                                                                    }
+
+                                                                ]} />
+                                                            <div className="text-center">
+                                                                <div className="row">
+                                                                    <div className="col-md-10">
+
+                                                            <FormGroup className="col-md-5  px-5 py-3" >
+                                                                <Label for="exampleSelect" >
+                                                                    Sex:
+                                                                </Label>
+                                                                <Input
+                                                                    type="select"
+                                                                    name="sex"
+                                                                    id="psex"
+                                                                    value={this.state.sex}
+                                                                    onChange={this.onKeydrop}
+                                                                >
+                                                                    <option>Select Sex...</option>
+                                                                    <option value='male'>Male</option>
+                                                                    <option value='female'>Female</option>
+                                                                </Input>
+                                                            </FormGroup>
+                                                                    </div></div></div>
+                                                            <FormInputs
+
+                                                                ncols={["col-md-9  px-5 py-3"]}
+
+                                                                proprieties={[
+                                                                    {
+                                                                        label: "Address",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter Address",
+                                                                            name: "address",
+                                                                            id:"address",
+                                                                            value: this.state.address,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+                                                                    }
+
+                                                                ]} />
+
+                                                            {/*<Row>*/}
+                                                            <div className="text-center">
+                                                            <div className="row">
+                                                                <div className="col-md-5">
+                                                            <FormGroup>
+                                                                <Label for="exampleSelect">
+                                                                    Type:
+                                                                </Label>
+                                                                <Input
+                                                                    type="select"
+                                                                    name="type"
+                                                                    id="ptype"
+                                                                    value={this.state.type}
+                                                                    onChange={this.onKeydrop}
+                                                                >
+                                                                    <option>Select Type...</option>
+                                                                    <option value='foreign'>Foreign</option>
+                                                                    <option value='local'>Local</option>
+                                                                </Input>
+                                                            </FormGroup>
+                                                                </div></div></div>
+                                                            {/*</Row>*/}
+                                                            <FormInputs
+
+                                                                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3","col-md-5 px-5 py-3"]}
+
+                                                                proprieties={[
+                                                                    {
+                                                                        label: "Country",
+                                                                        inputProps: {
+                                                                            type: "text",
+                                                                            placeholder: "Enter country",
+                                                                            name: "country",
+                                                                            id:"pcntry",
+                                                                            value: this.state.country,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        label: "Password",
+                                                                        inputProps: {
+                                                                            type: "password",
+                                                                            placeholder: "Enter Password",
+                                                                            // defaultValue: "",
+                                                                            name: "password",
+                                                                            id:"pcntry",
+                                                                            value: this.state.password,
+                                                                            onChange: this.onKeydrop
+                                                                        }
+
+                                                                    },
+                                                                    {
+                                                                        label: "Confirm Password",
+                                                                        inputProps: {
+                                                                            type: "password",
+                                                                            placeholder: "Renter Password",
+                                                                            // defaultValue: "",
+                                                                            name: "cpassword",
+                                                                            id:"pcntry",
+                                                                            value: this.state.cpassword,
+                                                                            onChange: this.onKeydrop,
+                                                                            onBlur: this.passwordConfirmation
+                                                                        }
+
+                                                                    }
+
+                                                                ]} />
+                                                            <ButtonGroup className="pull-right">
+
+                                                                <Button
+                                                                    outline
+                                                                    color="primary"
+                                                                    size="lg"
+                                                                    onClick={this.clearFields}
+                                                                >
+                                                                    Clear
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </div>
+                                                    </div>
+                                                    <h3>
+                                                        {" "}
+                                                        <Badge color="info">{this.state.message}</Badge>
+                                                    </h3>
+                                                </form>
+                                            </CardBody>
+                                        </div>
+                                    </Card>
+
+                                </CardGroup>
+
+                                <ButtonGroup className="pull-right">
+                                    <Button
+                                        outline
+                                        color="primary"
+                                        size="lg"
+                                        onClick={this.registerPassenger}
+                                    >
+                                        Register
+                                    </Button>
+                                    <Button
+                                        outline
+                                        color="warning"
+                                        size="lg"
+                                        // onClick={this.UpdateFeeAlgo}
+                                    >
+                                        Update
+                                    </Button>
+                                </ButtonGroup>
+                            </CardBody>
+                        </Card>
+                    </Col>
+
+                </Row>
             </div>
         );
     }
