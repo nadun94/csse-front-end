@@ -69,7 +69,7 @@ class Header extends React.Component {
       <div>
         <Navbar color="dark" light expand="md">
           <NavbarBrand href="/">
-            <h3>ShermanTravel</h3>
+            <h3>Sri Lanka Transport Service</h3>
           </NavbarBrand>
           {/* <NavbarToggler onClick={this.toggle} className="mr-2" /> */}
           <div className="navbar-toggle">

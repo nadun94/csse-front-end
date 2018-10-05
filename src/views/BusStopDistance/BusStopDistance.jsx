@@ -37,6 +37,10 @@ class BusStopDistance extends React.Component {
       combination: [],
       options: null,
       selected_route: "",
+      distance: [],
+      bus_stop_list: [],
+      bus_stop_row:[],
+
 
     };
     //this.handleDate = this.handleDate.bind(this);
@@ -47,7 +51,7 @@ class BusStopDistance extends React.Component {
     this.addBusStopDistance = this.addBusStopDistance.bind(this);
 
     // this.clear=this.clear.bind(this);
-    this.generateCombinationList=this.generateCombinationList.bind(this);
+    this.generateCombinationList = this.generateCombinationList.bind(this);
     // checkerror=this.checkerror.bind(this);
   }
 
@@ -71,7 +75,7 @@ class BusStopDistance extends React.Component {
         .then(data => {
           console.log(data)
           self.setState({ combination: data })
-         
+
         });
     } catch (error) {
       console.log(error)
@@ -79,52 +83,58 @@ class BusStopDistance extends React.Component {
     this.generateCombinationList
 
   }
+  handleClick(index, event) {
+    var distance = this.state.distance.slice();
+    distance[index] = event.target.value;
+    this.setState({ distance: distance });
+  }
   generateCombinationList() {
-  
+
     return (
       <div>
         {
           this.state.combination.map((item, key) =>
 
-              <FormInputs
+            <FormInputs
 
-                ncols={["col-md-5  px-5 py-3", "col-md-5 px-5 py-3","col-md-5  px-5 py-3"]}
+              ncols={["col-md-4  px-4 py-3", "col-md-4 px-5 py-3", "col-md-4  px-5 py-3"]}
 
-                proprieties={[
-                  {
-                    label: "Bus stop one",
-                    inputProps: {
-                      type: "text",
-                      placeholder: "Enter bus stop one",
-                      name: "classFactor1",
-                      // value: this.state.classFactor1,
-                      onChange: this.handleattributes
-                    }
-                  },
-                  {
-                    label: "Bus stop two",
-                    inputProps: {
-                      type: "text",
-                      placeholder: "Enter bus stop two",
-                      defaultValue: "",
-                      name: "busClass1",
-                      // value: this.state.busClass1,
-                      onChange: this.handleattributes
-                    }
-                  },
-                  {
-                    label: "Distance(km)",
-                    inputProps: {
-                      type: "text",
-                      placeholder: "Enter distance",
-                      defaultValue: "",
-                      name: "busClass1",
-                      // value: this.state.busClass1,
-                      // onChange:this.handleClick.bind(this, (key))
-                    }
+              proprieties={[
+                {
+                  label: "Bus stop one",
+                  inputProps: {
+                    type: "text",
+                    placeholder: "Enter bus stop one",
+                    // name: "classFactor1",
+                    value: item.key,
+                    onChange: this.handleattributes
                   }
+                },
+                {
+                  label: "Bus stop two",
+                  inputProps: {
+                    type: "text",
+                    placeholder: "Enter bus stop two",
+                    defaultValue: "",
+                    // name: "busClass1",
+                    value: item.value,
+                    onChange: this.handleattributes
+                  }
+                },
+                {
+                  label: "Distance(km)",
+                  inputProps: {
+                    type: "text",
+                    placeholder: "Enter distance",
+                    defaultValue: "",
+                    name: "distance",
+                    id: key + 1,
+                    // value: this.state.distance,
+                    onChange: this.handleClick.bind(this, (key))
+                  }
+                }
 
-                ]} />
+              ]} />
 
 
 
@@ -136,26 +146,20 @@ class BusStopDistance extends React.Component {
 
 
   // update BusStopDistance algo
-  addBusStopDistance() {
+  async addBusStopDistance() {
+    await this.setState({bus_stop_row:[]})
+      await this.state.combination.map((item,key) => {
+        // this.setState({bus_stop_row:{busHalt1:item.key,busHalt2:item.value,distance:this.state.distance[key]}})
+        this.state.bus_stop_row.push({"busHalt1":item.key,"busHalt2":item.value,"distance":this.state.distance[key]})
+         this.state.bus_stop_list.push(this.state.bus_stop_row)
+      })
+      // console.log(this.state.bus_stop_list)
+      console.log("fuck",this.state.bus_stop_row)
     var self = this;
-    axios.post('/BusStopDistance-algo/update-BusStopDistance-algo', {
-      initialprice1: self.state.initialValue1,
-      priceFactor1: self.state.priceFactor1,
-      classFactor1: self.state.classFactor1,
-      busClass1: self.state.busClass1,
-      id1: self.state.id1,
-
-      initialprice2: self.state.initialValue2,
-      priceFactor2: self.state.priceFactor2,
-      classFactor2: self.state.classFactor2,
-      busClass2: self.state.busClass2,
-      id2: self.state.id2,
-
-      initialprice3: self.state.initialValue3,
-      priceFactor3: self.state.priceFactor3,
-      classFactor3: self.state.classFactor3,
-      busClass3: self.state.busClass3,
-      id3: self.state.id3,
+    axios.post('/bus-fare/add-bus-stop-distance', {
+      bs:this.state.bus_stop_row
+      
+      
     })
       .then(function (res) {
         // if (res.data.postcheck_pass == "true") {
@@ -249,7 +253,7 @@ class BusStopDistance extends React.Component {
                         id="exampleSelect"
                         onChange={this.onSelectChange.bind(this)} value={this.state.selected_route}
                       >
-                      <option value="">Select a bus route</option>
+                        <option value="">Select a bus route</option>
                         {this.state.options}
 
                       </Input>
@@ -282,8 +286,8 @@ class BusStopDistance extends React.Component {
               </CardHeader>
               <CardBody>
                 <div className="row">
-                  <div className="col-md-5">
-                {  this.generateCombinationList()}
+                  <div className="col-md-10">
+                    {this.generateCombinationList()}
                   </div>
                 </div>
 
@@ -292,9 +296,9 @@ class BusStopDistance extends React.Component {
                     outline
                     color="primary"
                     size="lg"
-                    onClick={this.searchBustopDistance}
+                    onClick={this.addBusStopDistance}
                   >
-                    Search
+                    Update
           </Button>
                 </ButtonGroup>
               </CardBody>
