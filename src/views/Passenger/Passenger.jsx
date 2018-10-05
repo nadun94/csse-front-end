@@ -87,6 +87,7 @@ class Passenger extends React.Component {
                     alert(response.data);
                 }).then(() => {
                     this.clearFields();
+                window.location.reload();
             })
                 .catch(function (error) {
                     console.log(error);

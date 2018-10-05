@@ -35,7 +35,7 @@ function checkLogin() {
       return (
          <switch>
              <Route to="/passenger" component={Passenger} />
-             {/*<Redirect to="/login"/>                                                                                                                                                                                                             <Redirect to='/login' />*/}
+             <Redirect to="/login"/>                                                                                                                                                                                                             <Redirect to='/login' />
               <Route
                  exact path='/login'
                   component={Login}
