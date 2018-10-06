@@ -8,33 +8,40 @@ import "assets/scss/now-ui-dashboard.css";
 import "assets/css/demo.css";
 import "assets/css/tasks.css";
 import Login from "./views/Login/Login";
+import Passenger from "./views/Passenger/Passenger";
+import Home from "./views/Home/Home";
+import Dashbord from "./layouts/Dashboard/Dashboard";
 import indexRoutes from "routes/index.jsx";
 
 const hist = createBrowserHistory();
 
 function checkLogin() {
   if (!sessionStorage.getItem("loging_status")) {
-    return (
-      <div>
-        {/* <Route path="/" component={Dashboard} />
-       */}
-        {indexRoutes.map((prop, key) => {
-          return (
-           <div>
-              {/* <Redirect to="/home" /> */}
-            <Route path={prop.path} key={key} component={prop.component} />
-            </div>
-          );
-        })}
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <Redirect to="/login" />
-        <Route path="/login" component={Login} />
-      </div>
-    );
+      return (
+
+          <switch>
+              {indexRoutes.map((prop, key) => {
+                  return (
+                      <div>
+                          {/* <Redirect to="/home" /> */}
+                          <Route path={prop.path} key={key} component={prop.component}/>
+                      </div>
+                  );
+              })}
+          </switch>
+      )
+  }
+  else {
+      return (
+         <switch>
+             <Route to="/passenger" component={Passenger} />
+             <Redirect to="/login"/>                                                                                                                                                                                                             <Redirect to='/login' />
+              <Route
+                 exact path='/login'
+                  component={Login}
+              />
+              </switch>
+      )
   }
 }
 

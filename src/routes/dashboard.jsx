@@ -5,6 +5,10 @@ import BusStopDistance from '../views/BusStopDistance/BusStopDistance.jsx';
 import Addbus from "views/AddBus/Addbus.jsx";
 import AccountDetails from "views/AccountDetails/AccountDetails.jsx"
 import Demo from '../views/Demo/Demo.jsx';
+import Recharge from '../views/Recharge/Recharge.jsx';
+
+import Route from "views/Route/Route.jsx";
+
 var dashRoutes = [
   {
     path: "/home",
@@ -15,11 +19,6 @@ var dashRoutes = [
     path: "/fee",
     name: "Fee",
     component: Fee
-  },
-  {
-    path: "/passenger",
-    name: "Passenger",
-    component: Passenger
   },
   {
     path: "/bus-stop-distance",
@@ -40,6 +39,28 @@ var dashRoutes = [
   path: "/demo",
   name: "Demo",
   component: Demo
+},{
+  path: "/demo",
+  name: "Demo",
+  component: Demo
+},
+    {
+        path: "/route",
+        name: "Route",
+        component: Route
+    },
+    {
+      path: "/Recharge",
+      name: "Recharge",
+      component: Recharge
+  },
+
+{
+
+
+  path: "/AccountDetails",
+  name: "AccountDetails",
+  component: AccountDetails
 },
 
   { redirect: true, path: "/", pathTo: "/home", name: "Home" }

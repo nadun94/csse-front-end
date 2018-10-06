@@ -29,14 +29,15 @@ import {
 import moment from "moment";
 import { PanelHeader, FormInputs } from "components";
 
-class Addbus extends React.Component {
+class Recharge extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             pid:"",
-            amount_available:null,
+            amountAvailable:"",
             name:"",
-            phoneNo:""
+            paytype:"",
+            payamount:""
 
 
         };
@@ -45,10 +46,10 @@ class Addbus extends React.Component {
         this.handleChange = this.handleChange.bind(this);
 
 
-        this.addbussave = this.GetLoan.bind(this);
+        this.AddRecharge = this.AddRecharge.bind(this);
         this.clear = this.clear.bind(this);
         this.accountbalancepid=this.accountbalancepid.bind(this);
-        this.GetLoan=this.GetLoan.bind(this)
+        this.AddRecharge=this.AddRecharge.bind(this)
 
 
     }
@@ -57,7 +58,9 @@ class Addbus extends React.Component {
 
     clear() {
         this.setState({
-           pid:"",
+           paytype:"",
+           payamount:"",
+
 
         })
         console.log("clear")
@@ -66,17 +69,21 @@ class Addbus extends React.Component {
 
 
     // add bus
-    GetLoan() {
+    AddRecharge() {
         var self = this;
-       
+       console.log(this.state.pid)
 
 
     
-            axios.post('/Busloan/applyloan', {
+            axios.post('/Recharge/addrecharge', {
+                
 
 
                 pid: this.state.pid,
-                amount_available:this.state.amount_available
+                amountAvailable:this.state.amountAvailable,
+                name:this.state.name,
+                payamount:this.state.payamount,
+                paytype:this.state.paytype
               
 
 
@@ -87,6 +94,7 @@ class Addbus extends React.Component {
                   
                 }).then(()=>{
                     this.accountbalancepid()
+                    this.clear()
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -119,10 +127,13 @@ console.log(this.state.pid)
             .then(data => {
               console.log(data)
             console.log(data.amountAvailable)
-              self.setState({ amount_available: data.amountAvailable })
+              self.setState({ amountAvailable: data.amountAvailable })
               self.setState({ name: data.name })
-              self.setState({ phoneNo: data.phoneNo })
-              console.log(this.state.amount_available);
+              
+              console.log(this.state.amountAvailable);
+              console.log(this.state.name);
+              console.log(this.state.pid);
+
     
             }).catch((err)=>{
                 console.log(err)
@@ -161,7 +172,7 @@ console.log(this.state.pid)
                             <CardHeader>
                                 <h5 className="title">
                                     {" "}
-                                    Account Deials and getLoan {" "}
+                                    Account Deials and Recharge {" "}
                                 </h5>
 
                             </CardHeader>
@@ -172,7 +183,7 @@ console.log(this.state.pid)
                                             <CardHeader>
                                                 <h5 className="title">
                                                     {" "}
-                                                    Account Details{" "}
+                                                    Recharge Details{" "}
                                                 </h5>
                                             </CardHeader>
                                             <CardBody>
@@ -195,19 +206,7 @@ console.log(this.state.pid)
                                                                             onChange: this.handleattributes,
                                                                             disabled:true
                                                                         }
-                                                                    },
-                                                                    {
-                                                                        label: "account balance is",
-                                                                        inputProps: {
-                                                                            type: "text",
-                                                                            placeholder: "",
-                                                                            name: "amount_available",
-                                                                            value: this.state.amount_available,
-                                                                            onChange: this.handleattributes,
-                                                                            disabled:true
-                                                                        }
-                                                                    },
-                                                                    {
+                                                                    },   {
                                                                         label: "account name",
                                                                         inputProps: {
                                                                             type: "text",
@@ -218,19 +217,49 @@ console.log(this.state.pid)
                                                                             disabled:true
                                                                         }
                                                                     },
+
                                                                     {
-                                                                        label: "phone number",
+                                                                        label: "account balance is",
                                                                         inputProps: {
                                                                             type: "text",
                                                                             placeholder: "",
-                                                                            name: "phoneNo",
-                                                                            value: this.state.phoneNo,
+                                                                            name: "amountAvailable",
+                                                                            value: this.state.amountAvailable,
                                                                             onChange: this.handleattributes,
                                                                             disabled:true
                                                                         }
                                                                     },
+                                                                 
+                                                                    {
+                                                                        label: "pay amount",
+                                                                        inputProps: {
+                                                                            type: "number",
+                                                                            placeholder: "enter paymount amount",
+                                                                            name: "payamount",
+                                                                            value: this.state.payamount,
+                                                                            onChange: this.handleattributes,
+                                                                           
+                                                                        }
+                                                                    },
 
                                                                 ]} />
+                                                                 <FormGroup>
+                        <Label for="exampleSelect">Select payment type</Label>
+                        <Input
+                          type="select"
+                          name="paytype"
+                          id="paytype"
+                        //   onChange={this.onSelectChange.bind(this)}
+                        onChange={this.handleattributes}
+                          value={this.state.paytype}
+                        >
+                          <option value="">Select paytype</option>
+                          <option value="Cash">Cash</option>
+                          <option value="Credit_card">Credit card</option>
+                        </Input>
+                        <br />
+                        
+                      </FormGroup>
 
                                                         
                                                             
@@ -254,9 +283,9 @@ console.log(this.state.pid)
                                         outline
                                         color="primary"
                                         size="lg"
-                                        onClick={this.GetLoan}
+                                        onClick={this.AddRecharge}
                                     >
-                                        Get a Loan
+                                        Recharge Your Account
                       </Button>
 
                                 </ButtonGroup>
@@ -271,4 +300,4 @@ console.log(this.state.pid)
     }
 }
 
-export default Addbus;
+export default Recharge;
