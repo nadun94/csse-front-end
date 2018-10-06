@@ -373,14 +373,6 @@ class Passenger extends React.Component {
                                     >
                                         Register
                                     </Button>
-                                    <Button
-                                        outline
-                                        color="warning"
-                                        size="lg"
-                                        // onClick={this.UpdateFeeAlgo}
-                                    >
-                                        Update
-                                    </Button>
                                 </ButtonGroup>
                             </CardBody>
                         </Card>

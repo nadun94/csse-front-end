@@ -36,7 +36,7 @@ export default class Login extends Component {
         password: this.state.password
       })
       .then(function(res) {
-        console.log(res.data.name)
+        console.log(res.data.accLevel)
           console.log(res.data.auth)
         if (res.data.auth === true) {
           self.setState({ loading: false });
@@ -44,6 +44,7 @@ export default class Login extends Component {
           sessionStorage.setItem("loging_status", res.data.auth);
           sessionStorage.setItem("user", res.data.name);
           sessionStorage.setItem("pid", res.data.pid);
+          sessionStorage.setItem("accLevel", res.data.accLevel)
           self.setState({ show_error_login: false });
           window.location.reload();
         } else {
@@ -80,7 +81,7 @@ export default class Login extends Component {
         {/* <div className="big-wrapper"> */}
         <div className="rowlg">
           <h1 className="topic">
-            ITMS <CogIcon />{" "}
+            Transport Service <CogIcon />
           </h1>
           <div className="spinner">
             {this.state.loading && (
@@ -126,7 +127,7 @@ export default class Login extends Component {
                   >
                     Login
                   </Button>
-               <Link to="/passenger"> Register</Link>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/passenger">Register</Link>
                   {this.state.show_error_login && (
                     <h3 className="login-error">{this.state.message}</h3>
                   )}

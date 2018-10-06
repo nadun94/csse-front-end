@@ -68,11 +68,14 @@ class Header extends React.Component {
     return (
       <div>
         <Navbar color="dark" light expand="md">
+
           <NavbarBrand href="/">
             <h3>Sri Lanka Transport Service</h3>
           </NavbarBrand>
+            <p><font face="verdana" color="green" size="4">Hello {sessionStorage.getItem("user")}</font></p>
           {/* <NavbarToggler onClick={this.toggle} className="mr-2" /> */}
           <div className="navbar-toggle">
+
             <button
               type="button"
               ref="sidebarToggle"

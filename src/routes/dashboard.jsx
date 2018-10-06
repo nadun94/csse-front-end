@@ -4,6 +4,7 @@ import Passenger from "views/Passenger/Passenger.jsx";
 import BusStopDistance from '../views/BusStopDistance/BusStopDistance.jsx';
 import Addbus from "views/AddBus/Addbus.jsx";
 import Demo from '../views/Demo/Demo.jsx';
+import UserMan from "../views/UserManagement/UserManagement";
 var dashRoutes = [
   {
     path: "/home",
@@ -15,11 +16,11 @@ var dashRoutes = [
     name: "Fee",
     component: Fee
   },
-  // {
-  //   path: "/passenger",
-  //   name: "Passenger",
-  //   component: Passenger
-  // },
+  {
+    path: "/UserManagement",
+    name: "Profile Details",
+    component: UserMan
+  },
   {
     path: "/bus-stop-distance",
     name: "Bus Stop Distance",
