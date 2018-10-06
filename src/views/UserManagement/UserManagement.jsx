@@ -232,7 +232,7 @@ class UserManagement extends React.Component {
                     </Col>
                     <Col md={6} xs={12}>
 
-                        <Card>
+                        { sessionStorage.getItem("accLevel") == 1 && <Card>
                             <CardHeader>
                                 <h5 className="title">
                                     {" "}
@@ -254,37 +254,31 @@ class UserManagement extends React.Component {
                                                     id="route"
                                                     onChange={this.onKeydrop} value={this.state.user}
                                                 >
-                                                    <option value="">Select a bus route</option>
+                                                    <option value="">Select User</option>
                                                     {this.state.options}
+
+                                                </Input>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label for="exampleSelect">
+                                                    Access Level
+                                                </Label>
+                                                <Input
+                                                    type="select"
+                                                    name="user"
+                                                    id="route"
+                                                    onChange={this.onKeydrop} value={this.state.user}
+                                                >
+                                                    <option value="">Select User</option>
+                                                    <option value="1">Admin</option>
+                                                    <option value="2">Manager</option>
+                                                    <option value="3">Normal Passenger</option>
 
                                                 </Input>
                                             </FormGroup>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="col-md-10">
-                                        <FormInputs
-
-                                            ncols={["col-md-5  px-5 py-3"]}
-
-                                            proprieties={[
-                                                {
-                                                    label: "User",
-                                                    inputProps: {
-                                                        type: "text",
-                                                        placeholder: "Enter Bus Type",
-                                                        name: "type",
-                                                        // value: this.state.type,
-                                                        onChange: this.onKeydrop
-                                                    }
-                                                }
-
-                                            ]} />
-
-                                    </div>
-                                </div>
-
                                 <ButtonGroup className="pull-right">
                                     <Button
                                         outline
@@ -296,7 +290,7 @@ class UserManagement extends React.Component {
                                     </Button>
                                 </ButtonGroup>
                             </CardBody>
-                        </Card>
+                        </Card>}
                     </Col>
 
                 </Row>
