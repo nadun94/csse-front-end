@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import classnames from "classnames";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Carousel} from "react-responsive-carousel";
+import { Carousel } from "react-responsive-carousel";
 import {
     Card,
     Button,
@@ -27,9 +27,9 @@ import {
     Form,
     CustomInput
 } from "reactstrap";
-import {Tasks} from "components";
+import { Tasks } from "components";
 import moment from "moment";
-import {PanelHeader, FormInputs} from "components";
+import { PanelHeader, FormInputs } from "components";
 
 class Route extends React.Component {
     constructor(props) {
@@ -38,18 +38,18 @@ class Route extends React.Component {
             RouteID: "",
             rorigin: "",
             rdestination: "",
-            olatitude:"",
+            olatitude: "",
             olongitude: "",
             deslatitude: "",
             deslongitude: "",
-            destnation:"",
-            bus_stop_row:[],
-           // bus_stop_row:[],
-            busHaltID:"",
-            busHaltName:"",
-            town:"",
-            busHaltLatitude:"",
-            busHaltLongitude:""
+            destnation: "",
+            bus_stop_row: [],
+            // bus_stop_row:[],
+            busHaltID: "",
+            busHaltName: "",
+            town: "",
+            busHaltLatitude: "",
+            busHaltLongitude: ""
 
 
         };
@@ -58,6 +58,7 @@ class Route extends React.Component {
 
         this.clearFields = this.clearFields.bind(this);
         this.addRoutes = this.addRoutes.bind(this);
+        this.addRoutesOnly = this.addRoutesOnly.bind(this);
         this.updateRoutes = this.updateRoutes.bind(this);
         this.deleteRoutes = this.deleteRoutes.bind(this);
         this.addBusStop = this.addBusStop.bind(this)
@@ -66,103 +67,131 @@ class Route extends React.Component {
 
     componentDidMount() {
     }
-    async addBusStop(){
-        console.log(this.state.busHaltID)
-let self = this;
-  await  this.state.bus_stop_row.push({"busHaltID":"this.state.busHaltID","town":"this.state.town","busHaltName":this.state.busHaltName,"busHaltLatitude":this.state.busHaltLatitude,"busHaltLongitude":this.state.busHaltLongitude})
-//    await this.state.bus_stop_list.push(this.state.bus_stop_row)
-await console.log(this.state.bus_stop_row)
-}
-    addRoutes(){
-       
-// console.log(this.state.bus_stop_row)
-        alert(this.state.rorigin)
-            axios.post('/bus-route/add-route-only', {
-                RouteID: this.state.RouteID,
-                rorigin: this.state.rorigin,
-                rdestination:this.state.rdestination,
-                olatitude: this.state.olatitude,
-                olongitude: this.state.olongitude,
-                deslatitude: this.state.deslatitude,
-                deslongitude: this.state.deslongitude
+    async addBusStop() {
+        let self = this;
+        await this.state.bus_stop_row.push({ "busHaltID": this.state.busHaltID, "town": this.state.town, "busHaltName": this.state.busHaltName, "busHaltLatitude": this.state.busHaltLatitude, "busHaltLongitude": this.state.busHaltLongitude })
+        //    await this.state.bus_stop_list.push(this.state.bus_stop_row)
+        await console.log(this.state.bus_stop_row)
+    }
+    addRoutes() {
+        // console.log(this.state.bus_stop_row)
+        var headers = {
+            'Content-Type': 'application/json'
+           
+        }
+        axios.post('/bus-route/add-route-only', {
+            routeID: this.state.RouteID,
+            origin: this.state.rorigin,
+            destination: this.state.rdestination,
+            originLatitude: this.state.olatitude,
+            originLongitude: this.state.olongitude,
+            desLatitude: this.state.deslatitude,
+            desLongitude: this.state.deslongitude,
+            busStop:this.state.bus_stop_row
 
-            })
-                .then(function (response) {
-                    console.log(response);
-                    alert(response.data);
-                }).then(() => {
+            
+        },{headers: headers})
+            .then(function (response) {
+                console.log(response);
+                alert(response.data);
+            }).then(() => {
                 this.clearFields();
             })
-                .catch(function (error) {
-                    console.log(error);
-                });
-       // }
+            .catch(function (error) {
+                console.log(error);
+            });
+        
 
     }
-    updateRoutes(){
 
-        axios.put('/route/update', {
+    addRoutesOnly() {
+        // console.log(this.state.bus_stop_row)
+        axios.post('/bus-route/add-route-only', {
             RouteID: this.state.RouteID,
             rorigin: this.state.rorigin,
-            rdestination:this.state.rdestination,
+            rdestination: this.state.rdestination,
             olatitude: this.state.olatitude,
             olongitude: this.state.olongitude,
             deslatitude: this.state.deslatitude,
             deslongitude: this.state.deslongitude
-
-//                 }
+            
         })
             .then(function (response) {
                 console.log(response);
                 alert(response.data);
             }).then(() => {
-            this.clearFields();
+                this.clearFields();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        
+
+    }
+    updateRoutes() {
+
+        axios.put('/route/update', {
+            RouteID: this.state.RouteID,
+            rorigin: this.state.rorigin,
+            rdestination: this.state.rdestination,
+            olatitude: this.state.olatitude,
+            olongitude: this.state.olongitude,
+            deslatitude: this.state.deslatitude,
+            deslongitude: this.state.deslongitude
+
+            //                 }
         })
+            .then(function (response) {
+                console.log(response);
+                alert(response.data);
+            }).then(() => {
+                this.clearFields();
+            })
             .catch(function (error) {
                 console.log(error);
             });
         // }
 
     }
-    deleteRoutes(){
+    deleteRoutes() {
 
         axios.delete('/route/delete', {
             RouteID: this.state.RouteID,
 
 
-//                 }
+            //                 }
         })
             .then(function (response) {
                 console.log(response);
                 alert(response.data);
             }).then(() => {
-            this.clearFields();
-        })
+                this.clearFields();
+            })
             .catch(function (error) {
                 console.log(error);
             });
         // }
 
     }
-    addBusHalts(){
+    addBusHalts() {
 
         axios.put('/route/update', {
             RouteID: this.state.RouteID,
             rorigin: this.state.rorigin,
-            rdestination:this.state.rdestination,
+            rdestination: this.state.rdestination,
             olatitude: this.state.olatitude,
             olongitude: this.state.olongitude,
             deslatitude: this.state.deslatitude,
             deslongitude: this.state.deslongitude
 
-//                 }
+            //                 }
         })
             .then(function (response) {
                 console.log(response);
                 alert(response.data);
             }).then(() => {
-            this.clearFields();
-        })
+                this.clearFields();
+            })
             .catch(function (error) {
                 console.log(error);
             });
@@ -177,7 +206,7 @@ await console.log(this.state.bus_stop_row)
 
 
 
-    clearFields(){
+    clearFields() {
         this.setState({
             RouteID: '',
             rorigin: '',
@@ -191,13 +220,13 @@ await console.log(this.state.bus_stop_row)
 
     handleattributes({ target }) {
         this.setState({
-          [target.name]: target.value
+            [target.name]: target.value
         });
-      }
-    
+    }
 
 
-    onClickTest(){
+
+    onClickTest() {
         console.log(this.state.RouteID);
         console.log(this.state.rorigin);
         console.log(this.state.rdestination);
@@ -221,422 +250,422 @@ await console.log(this.state.bus_stop_row)
                                     Mange Bus Routes
                                 </CardHeader>
                                 <CardBody>
-                                <CardGroup>
-                               
-                                    <Card body className="text-center" style={{ borderColor: '#333' }}>
-                                        <div className="card-content">
-                                        <CardHeader>
-                                            <h5 className="title">
-                                                Add Route Details
+                                    <CardGroup>
+
+                                        <Card body className="text-center" style={{ borderColor: '#333' }}>
+                                            <div className="card-content">
+                                                <CardHeader>
+                                                    <h5 className="title">
+                                                        Add Route Details
                                             </h5>
-                                        </CardHeader>
-                                        <CardBody>
-                                            <form>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                                RouteID
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <form>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        RouteID
                                                             </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="RouteID"
-                                                                id="rno"
-                                                                value={this.state.RouteID}
-                                                                onChange={this.handleattributes}
-                                                            >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-5">
-                                                        <FormGroup>
-                                                            <Label for="exampleSelect">
-                                                              Origin
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="RouteID"
+                                                                        id="rno"
+                                                                        value={this.state.RouteID}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Origin
                                                             </Label>
-                                                            <Input
-                                                                type="text"
-                                                                name="rorigin"
-                                                                id="rorigin"
-                                                                value={this.state.rorigin}
-                                                                onChange={this.handleattributes}
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="rorigin"
+                                                                        id="rorigin"
+                                                                        value={this.state.rorigin}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Destination:
+                                                                </Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="rdestination"
+                                                                        id="rdestination"
+                                                                        value={this.state.rdestination}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        origin Latitude:
+                                                                </Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="olatitude"
+                                                                        id="olatitude"
+                                                                        value={this.state.olatitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        origin Longitude:
+                                                                </Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="olongitude"
+                                                                        id="olongitude"
+                                                                        value={this.state.olongitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Destination Latitude:
+                                                                </Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="deslatitude"
+                                                                        id="deslatitude"
+                                                                        value={this.state.deslatitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-5">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Destination Longitude:
+                                                                </Label>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="deslongitude"
+                                                                        id="deslongitude"
+                                                                        value={this.state.deslongitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
+                                                        </div>
+                                                        <ButtonGroup className="pull-right">
+                                                            <Button
+                                                                outline
+                                                                color="primary"
+                                                                size="lg"
+                                                                onClick={this.addRoutesOnly}
                                                             >
-                                                            </Input>
-                                                        </FormGroup>
-                                                    </div>
-                                                </div>
-                                                    <div className="row">
-                                                        <div className="col-md-5">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Destination:
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="rdestination"
-                                                                    id="rdestination"
-                                                                    value={this.state.rdestination}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                </div>
-                                                    <div className="row">
-                                                        <div className="col-md-5">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    origin Latitude:
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="olatitude"
-                                                                    id="olatitude"
-                                                                    value={this.state.olatitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-5">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    origin Longitude:
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="olongitude"
-                                                                    id="olongitude"
-                                                                    value={this.state.olongitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-5">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Destination Latitude:
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="deslatitude"
-                                                                    id="deslatitude"
-                                                                    value={this.state.deslatitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-5">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Destination Longitude:
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="deslongitude"
-                                                                    id="deslongitude"
-                                                                    value={this.state.deslongitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                <ButtonGroup className="pull-right">
-                                                    <Button
-                                                        outline
-                                                        color="primary"
-                                                        size="lg"
-                                                        onClick={this.addRoutes}
-                                                    >
-                                                        Add Route
+                                                                Add Route
                                                     </Button>
-                                                    <Button
-                                                        outline
-                                                        color="primary"
-                                                        size="lg"
-                                                        onClick={this.clearFields}
-                                                    >
-                                                        Reset
+                                                            <Button
+                                                                outline
+                                                                color="primary"
+                                                                size="lg"
+                                                                onClick={this.clearFields}
+                                                            >
+                                                                Reset
                                                     </Button>
-                                                </ButtonGroup>
+                                                        </ButtonGroup>
 
-                                                <h3>
-                                                    {" "}
-                                                    <Badge color="info">{this.state.message}</Badge>
-                                                </h3>
-                                            </form>
-                                        </CardBody>
-                                    </div>
-                                </Card>
-                             
-                                <br />
-                                {/* second card */}
-                              
-                                <Card body className="text-center" style={{ borderColor: '#333' }}>
-                                    <div className="card-content">
-                                    <CardHeader>
-                                                <h5 className="title">
-                                                    Add Bus halts
+                                                        <h3>
+                                                            {" "}
+                                                            <Badge color="info">{this.state.message}</Badge>
+                                                        </h3>
+                                                    </form>
+                                                </CardBody>
+                                            </div>
+                                        </Card>
+
+                                        <br />
+                                        {/* second card */}
+
+                                        <Card body className="text-center" style={{ borderColor: '#333' }}>
+                                            <div className="card-content">
+                                                <CardHeader>
+                                                    <h5 className="title">
+                                                        Add Bus halts
                                                 </h5>
-                                            </CardHeader>
-                                            <CardBody>
-                                                <form>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus HaltID
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <form>
+                                                        <div className="row">
+                                                            <div className="col-md-9">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Bus HaltID
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltID"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltID}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="busHaltID"
+                                                                        id="rno"
+                                                                        value={this.state.busHaltID}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Town
+                                                        <div className="row">
+                                                            <div className="col-md-9">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Town
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltName"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltName}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="busHaltName"
+                                                                        id="rno"
+                                                                        value={this.state.busHaltName}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Name
+                                                        <div className="row">
+                                                            <div className="col-md-9">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Bus Halt Name
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="town"
-                                                                    id="rno"
-                                                                    value={this.state.town}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="town"
+                                                                        id="rno"
+                                                                        value={this.state.town}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Latitude
+                                                        <div className="row">
+                                                            <div className="col-md-9">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Bus Halt Latitude
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltLatitude"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltLatitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="busHaltLatitude"
+                                                                        id="rno"
+                                                                        value={this.state.busHaltLatitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Longitiude
+                                                        <div className="row">
+                                                            <div className="col-md-9">
+                                                                <FormGroup>
+                                                                    <Label for="exampleSelect">
+                                                                        Bus Halt Longitiude
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltLongitude"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltLongitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
+                                                                    <Input
+                                                                        type="text"
+                                                                        name="busHaltLongitude"
+                                                                        id="rno"
+                                                                        value={this.state.busHaltLongitude}
+                                                                        onChange={this.handleattributes}
+                                                                    >
+                                                                    </Input>
+                                                                </FormGroup>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <ButtonGroup className="pull-right">
-                                                        <Button
-                                                            outline
-                                                            color="primary"
-                                                            size="lg"
-                                                            onClick={this.addRoutes}////////////////////////////////////////////////////////////
-                                                        >
-                                                            Add Bus Halt
+                                                        <ButtonGroup className="pull-right">
+                                                            <Button
+                                                                outline
+                                                                color="primary"
+                                                                size="lg"
+                                                                onClick={this.addBusStop}////////////////////////////////////////////////////////////
+                                                            >
+                                                                Add Bus Halt
                                                         </Button>
-                                                    </ButtonGroup>
+                                                        </ButtonGroup>
 
-                                                    <h3>
-                                                        {" "}
-                                                        <Badge color="info">{this.state.message}</Badge>
-                                                    </h3>
-                                                </form>
-                                        </CardBody>
-                                    </div>
-                                </Card>
-                            
+                                                        <h3>
+                                                            {" "}
+                                                            <Badge color="info">{this.state.message}</Badge>
+                                                        </h3>
+                                                    </form>
+                                                </CardBody>
+                                            </div>
+                                        </Card>
 
-                        
-                                
-                            </CardGroup>
-                            <ButtonGroup className="pull-right">
-                                                    <Button
-                                                        outline
-                                                        color="primary"
-                                                        size="lg"
-                                                        onClick={this.updateRoutes}
-                                                    >
-                                                        Add Route
+
+
+
+                                    </CardGroup>
+                                    <ButtonGroup className="pull-right">
+                                        <Button
+                                            outline
+                                            color="primary"
+                                            size="lg"
+                                            onClick={this.addRoutes}
+                                        >
+                                            Add Route and Bus Stops
                                                     </Button>
-                                                
-                                                </ButtonGroup>
+
+                                    </ButtonGroup>
                                 </CardBody>
                             </Card>
                         </Col>
 
-                  
+
                     </Row>
 
                     <Row>
                         <Col md={12} xs={12}>
-                        <Card body className="text-center" style={{ borderColor: '#333' }}>
-                                        <div className="card-content">
-                                            <CardHeader>
-                                                <h5 className="title">
-                                                    Add Bus halts
+                            <Card body className="text-center" style={{ borderColor: '#333' }}>
+                                <div className="card-content">
+                                    <CardHeader>
+                                        <h5 className="title">
+                                            Add Bus halts
                                                 </h5>
-                                            </CardHeader>
-                                            <CardBody>
-                                                <form>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus HaltID
+                                    </CardHeader>
+                                    <CardBody>
+                                        <form>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            Bus HaltID
                                                                 </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltID"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltID}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Town
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltName"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltName}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Name
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="town"
-                                                                    id="rno"
-                                                                    value={this.state.town}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Latitude
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltLatitude"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltLatitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-9">
-                                                            <FormGroup>
-                                                                <Label for="exampleSelect">
-                                                                    Bus Halt Longitiude
-                                                                </Label>
-                                                                <Input
-                                                                    type="text"
-                                                                    name="busHaltLongitude"
-                                                                    id="rno"
-                                                                    value={this.state.busHaltLongitude}
-                                                                    onChange={this.handleattributes}
-                                                                >
-                                                                </Input>
-                                                            </FormGroup>
-                                                        </div>
-                                                    </div>
-
-                                                    <ButtonGroup className="pull-right">
-                                                        <Button
-                                                            outline
-                                                            color="primary"
-                                                            size="lg"
-                                                            onClick={this.addBusStop}////////////////////////////////////////////////////////////
+                                                        <Input
+                                                            type="text"
+                                                            name="busHaltID"
+                                                            id="rno"
+                                                            value={this.state.busHaltID}
+                                                            onChange={this.handleattributes}
                                                         >
-                                                            Add Bus Halt
-                                                        </Button>
-                                                    </ButtonGroup>
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            Town
+                                                                </Label>
+                                                        <Input
+                                                            type="text"
+                                                            name="busHaltName"
+                                                            id="rno"
+                                                            value={this.state.busHaltName}
+                                                            onChange={this.handleattributes}
+                                                        >
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            Bus Halt Name
+                                                                </Label>
+                                                        <Input
+                                                            type="text"
+                                                            name="town"
+                                                            id="rno"
+                                                            value={this.state.town}
+                                                            onChange={this.handleattributes}
+                                                        >
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            Bus Halt Latitude
+                                                                </Label>
+                                                        <Input
+                                                            type="text"
+                                                            name="busHaltLatitude"
+                                                            id="rno"
+                                                            value={this.state.busHaltLatitude}
+                                                            onChange={this.handleattributes}
+                                                        >
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-9">
+                                                    <FormGroup>
+                                                        <Label for="exampleSelect">
+                                                            Bus Halt Longitiude
+                                                                </Label>
+                                                        <Input
+                                                            type="text"
+                                                            name="busHaltLongitude"
+                                                            id="rno"
+                                                            value={this.state.busHaltLongitude}
+                                                            onChange={this.handleattributes}
+                                                        >
+                                                        </Input>
+                                                    </FormGroup>
+                                                </div>
+                                            </div>
 
-                                                    <h3>
-                                                        {" "}
-                                                        <Badge color="info">{this.state.message}</Badge>
-                                                    </h3>
-                                                </form>
-                                            </CardBody>
-                                        </div>
-                                    </Card>
+                                            <ButtonGroup className="pull-right">
+                                                <Button
+                                                    outline
+                                                    color="primary"
+                                                    size="lg"
+                                                    onClick={this.addBusStop}////////////////////////////////////////////////////////////
+                                                >
+                                                    Add Bus Halt
+                                                        </Button>
+                                            </ButtonGroup>
+
+                                            <h3>
+                                                {" "}
+                                                <Badge color="info">{this.state.message}</Badge>
+                                            </h3>
+                                        </form>
+                                    </CardBody>
+                                </div>
+                            </Card>
                         </Col>
-                        </Row>
+                    </Row>
                     <Row>
                         <Col md={12} xs={12}>
                             <Card body className="text-center" style={{ borderColor: '#333' }}>

@@ -106,7 +106,10 @@ class Fee extends React.Component {
 
   // update fee algo
   UpdateFeeAlgo() {
-    var self = this;
+    if(this.state.id1==null || this.state.id2== null || this.state.id3==null){
+      alert("ID can not be null")
+    }else{
+      var self = this;
     axios.post('/fee-algo/update-fee-algo', {
       initialprice1: self.state.initialValue1,
       priceFactor1: self.state.priceFactor1,
@@ -130,12 +133,13 @@ class Fee extends React.Component {
         // if (res.data.postcheck_pass == "true") {
         //   self.setState({ postcheck_pass: res.data.postcheck_pass }
         // else {
-
+alert('Fee algorithm values updated successfully')
         console.log(res.data)
       }).catch((error)=>{
         console.log(error)
       })
 
+    }
       
        
       
